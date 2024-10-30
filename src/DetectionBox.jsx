@@ -32,14 +32,12 @@ export const DetectionBox = () => {
     if (onDetection && model) {
       loadWebcam();
     } else if (!onDetection && webcam) {
-      console.log("parando camaras en useEffect");
       webcam.stop();
       setWebcam(null);
       setDetection([]);
       // Limpiar el canvas cuando la webcam se detiene
       const canvas = canvasRef.current;
       if (canvas) {
-        console.log("limpiando canvas en useEffect");
         const context = canvas.getContext("2d");
         context.clearRect(0, 0, canvas.width, canvas.height); // Limpiar todo el canvas
       }
@@ -65,13 +63,11 @@ export const DetectionBox = () => {
     };
   
     const webcamInstance = new tmImage.Webcam(300, 300, flip); // Ancho, alto, flip (false)
-    console.log("webcamInstance:", webcamInstance);
     setWebcam(webcamInstance);
   
     // Configurar la webcam con las restricciones
     await webcamInstance.setup(constraints.video); // Pedir acceso a la cámara
     await webcamInstance.play(); // Iniciar la cámara
-    console.log("webcam instanciado antes de loop:", webcamInstance);
   
     // Iniciar el loop de actualización de frames
     window.requestAnimationFrame(() => loop(webcamInstance));
@@ -112,7 +108,6 @@ export const DetectionBox = () => {
 
       // Aquí puedes manejar la lógica para mostrar las mejores predicciones
       setDetection(results);
-      console.log("Detection: ", results);
     }
   }
 
@@ -139,7 +134,9 @@ export const DetectionBox = () => {
     isDogOrCat === "gato"
       ? detection[0]?.probability.toFixed(2)
       : detection[1]?.probability.toFixed(2);
+
   console.log("isDogOrCat:", isNaN((isDogOrCatProbability * 100).toFixed(2)));
+
   const isDogOrCatPercent = isNaN((isDogOrCatProbability * 100).toFixed(2))
     ? 0
     : (isDogOrCatProbability * 100).toFixed(2);
