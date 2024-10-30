@@ -170,7 +170,7 @@ export const DetectionBox = () => {
         </div>
         <button
           onClick={handleWebCam}
-          className="p-2 bg-[#1FC473] hover:border-4 hover:border-[#89dcb4] rounded-md text-white font-semibold"
+          className={`p-2 ${ !onDetection ? 'bg-[#1FC473] hover:border-[#89dcb4]' : 'bg-none border-2 border-red-600 text-red-600 hover:border-[#dc8989]'} hover:border-4 rounded-md text-white font-semibold`} 
         >
           {onDetection ? "Finalizar IA" : "Iniciar IA"}
         </button>
